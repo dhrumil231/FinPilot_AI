@@ -116,3 +116,60 @@ The entire system runs on a single dataset, one notebook, and zero external APIs
 ---
 
 ## 🏗 System Architecture
+Personal_Finance_Dataset_1.csv
+(32,424 rows × 20 columns)
+│
+▼
+┌──────────────────────────────────────────┐
+│         STEP 1 — DATA LOADING & EDA      │
+│  Shape / dtypes / missing / statistics   │
+│  6 EDA figures  →  fig01 through fig06   │
+└──────────────────────────────────────────┘
+│
+▼
+┌──────────────────────────────────────────┐
+│       STEP 2 — FEATURE ENGINEERING       │
+│  13 derived financial features           │
+│  Age groups, savings tiers, credit tiers │
+│  Binary loan target, temporal features   │
+└──────────────────────────────────────────┘
+│
+▼
+┌──────────────────────────────────────────┐
+│   STEP 3 — PREPROCESSING (3 sets)        │
+│  Label encoding — 6 categorical columns  │
+│  StandardScaler applied per model        │
+│  Leakage-free feature selection per task │
+└──────────────────────────────────────────┘
+│
+┌──────────┼──────────┐
+▼          ▼          ▼
+┌──────────┐ ┌─────────┐ ┌──────────────┐
+│ MODEL 1  │ │ MODEL 2 │ │   MODEL 3    │
+│Regression│ │ Binary  │ │ Multi-Class  │
+│ Monthly  │ │  Loan   │ │   Savings    │
+│ Expenses │ │  Risk   │ │    Tier      │
+│Prediction│ │  Classif│ │Classification│
+└──────────┘ └─────────┘ └──────────────┘
+│
+▼
+┌──────────────────────────────────────────┐
+│   STEP 4 — POST-TRAINING ANALYSIS        │
+│  3-fold cross-validation all models      │
+│  Permutation importance (3 tasks)        │
+│  Calibration & Precision-Recall curves   │
+│  Learning curves — bias/variance check   │
+│  Residual diagnostics — regression       │
+│  Monthly time trend analysis             │
+│  Income band deep-dive (6 metrics)       │
+└──────────────────────────────────────────┘
+│
+▼
+┌──────────────────────────────────────────┐
+│     STEP 5 — FINPILOT ADVISOR ENGINE     │
+│  9 recommendation categories             │
+│  Composite Financial Health Score 0–100  │
+│  Letter grade: A / B / C / D             │
+│  50/30/20 budget guide per user          │
+│  Personalised dollar-amount targets      │
+└──────────────────────────────────────────┘
