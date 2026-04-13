@@ -1,175 +1,303 @@
 # FinPilot_AI
-<div align="center">
+# 💰 FinPilot AI — Personal Finance Intelligence & Budget Advisory System
 
-# 🧠 FinPilot AI
-### Smart Budget & Financial Advisor
-
-[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.3%2B-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-learn.org)
-[![Pandas](https://img.shields.io/badge/Pandas-2.0%2B-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org)
-[![NumPy](https://img.shields.io/badge/NumPy-1.24%2B-013243?style=for-the-badge&logo=numpy&logoColor=white)](https://numpy.org)
-[![Matplotlib](https://img.shields.io/badge/Matplotlib-3.7%2B-11557C?style=for-the-badge)](https://matplotlib.org)
-[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org)
-[![License](https://img.shields.io/badge/License-MIT-27ae60?style=for-the-badge)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-2ecc71?style=for-the-badge)]()
-[![Hackathon](https://img.shields.io/badge/Global%20Fusion%20Hackathon-FinTech%20Track%202026-e74c3c?style=for-the-badge)]()
-
-<br/>
-
-> **Financial advice has always been a luxury product.**
-> **FinPilot AI gives the other 3.5 billion people something better.**
-
-<br/>
-
-*An end-to-end machine learning pipeline that analyzes personal financial data across 32,424 real user profiles — predicting spending patterns, classifying loan risk, tiering savings readiness, and delivering a personalised 0–100 Financial Health Score with actionable budget recommendations in plain English.*
-
-<br/>
-
-</div>
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat-square&logo=python)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-ML%20Pipeline-orange?style=flat-square&logo=scikit-learn)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?style=flat-square&logo=pandas)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-blueviolet?style=flat-square)
+![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 ---
 
-## 📌 Table of Contents
+## 📌 Project Overview
 
-- [Problem Statement](#-problem-statement)
-- [Solution Overview](#-solution-overview)
-- [Key Features](#-key-features)
-- [Tech Stack](#-tech-stack)
-- [System Architecture](#-system-architecture)
-- [Dataset](#-dataset)
-- [Feature Engineering](#-feature-engineering)
-- [Machine Learning Pipeline](#-machine-learning-pipeline)
-- [Model Results](#-model-results)
-- [Visualizations](#-visualizations--26-figures)
-- [FinPilot Budget Advisor Engine](#-finpilot-budget-advisor-engine)
-- [Installation](#-installation)
-- [How to Run](#-how-to-run)
-- [Sample Output](#-sample-output)
-- [Project Impact](#-project-impact)
-- [Future Roadmap](#-future-roadmap)
-- [Author](#-author)
-- [License](#-license)
+**FinPilot AI** is an end-to-end machine learning pipeline built on a real-world personal finance dataset. The project combines supervised learning (regression + multi-class classification), rich exploratory data analysis, and a rule-based budget advisory engine — all packaged in a single, reproducible notebook.
+
+The core question driving this project: *Can we predict how individuals manage their money, and can a data-driven advisor provide actionable, personalized financial guidance?*
+
+### Key Capabilities
+- **Predict monthly expenses** from income, credit, demographics, and loan features
+- **Classify loan risk** (binary: has loan / no loan) using multiple classifiers
+- **Tier savings behavior** into 5 categories (Very Low → Very High) via multi-class classification
+- **Advise users** with a rule-based budget advisor that evaluates emergency funds, expense ratios, credit health, and EMI burden
+- **Visualize everything** — 26 publication-quality charts covering distributions, feature importance, ROC curves, calibration, learning curves, and more
 
 ---
 
-## 🎯 Problem Statement
+## 📂 Repository Structure
 
-Over **3.5 billion people** globally have no access to a financial advisor.
-
-The tools that exist — bank apps, spending dashboards, budgeting widgets — show you what already happened. They produce a report of last month and call it guidance. No one tells you what to do **next**.
-
-The consequences are real and measurable:
-
-- The average person saves less than 5% of their monthly income
-- Half the population carries debt with a DTI ratio above 0.43 — the risk threshold
-- Most people could not survive 3 months on their savings if their income stopped tomorrow
-- The majority retire underprepared — not from carelessness, but from the absence of a plan
-
-This is not a financial literacy problem. It is an **access problem**. A real financial advisor costs hundreds of dollars an hour. FinPilot AI is built to close that gap.
+```
+FinPilotAI/
+│
+├── FinPilotAI_2_.ipynb            # Main notebook — full ML pipeline
+├── Personal_Finance_Dataset_1.csv # Input dataset (required to run)
+├── finpilot_plots/                # Auto-generated folder with all 26 plot PNGs
+│   ├── fig01_distributions.png
+│   ├── fig02_...
+│   └── ...
+├── finpilot_combined_board.png    # High-res merged visualization board
+└── README.md
+```
 
 ---
 
-## 💡 Solution Overview
+## 🗃️ Dataset
 
-FinPilot AI is a complete data science and machine learning pipeline that transforms raw personal finance data into four concrete outputs:
+**File:** `Personal_Finance_Dataset_1.csv`
 
-| Output | Description |
+| Feature | Description |
 |---|---|
-| **Predictions** | What will a user spend next month? What is their loan risk profile? |
-| **Classifications** | Which savings tier do they fall into across a 32,000-user benchmark? |
-| **Recommendations** | A personalised, rule-based budget plan across 9 financial health dimensions |
-| **A Score** | A 0–100 Financial Health Score with a letter grade (A / B / C / D) |
-
-The entire system runs on a single dataset, one notebook, and zero external APIs. It is built to be extended, deployed, and scaled.
-
----
-
-## ✨ Key Features
-
-- 🔬 **3 independent ML prediction tasks** — regression, binary classification, and 5-class multi-class classification, each with its own leakage-free feature set and evaluation framework
-- 🤖 **11 ML algorithms benchmarked** — Ridge, Lasso, Random Forest, Extra Trees, Gradient Boosting, Hist Gradient Boosting, SVR (RBF), MLP Neural Network, KNN, AdaBoost, Decision Tree
-- 📊 **26 production-quality visualizations** — spanning EDA, model evaluation, calibration curves, permutation importance, learning curves, income band analysis, time trends, and residual diagnostics
-- 🧮 **13 engineered financial features** — derived ratios including expense ratio, EMI-to-income, savings runway in months, loan burden, net monthly cashflow, and interest cost estimate
-- 💬 **Rule-based Budget Advisor Engine** — 9-category personalised recommendations with a composite 0–100 health score and A/B/C/D letter grade
-- 🌍 **Global benchmark dataset** — 32,424 users across 5 regions: Africa, Asia, Europe, North America, and Other
-- 🔁 **3-fold stratified cross-validation** — on all model families with boxplot stability analysis
-- 📈 **Learning curve diagnostics** — bias-variance tradeoff analysis for all new model families
-- 🎯 **Calibration analysis** — assessing whether predicted probabilities are reliable, not just accurate
-- 📉 **Permutation feature importance** — model-agnostic importance computed across all 3 prediction tasks simultaneously
+| `monthly_income_usd` | Individual's gross monthly income |
+| `monthly_expenses_usd` | Total monthly spending (target: regression) |
+| `savings_usd` | Current savings balance |
+| `credit_score` | Numeric credit score |
+| `debt_to_income_ratio` | Debt as a proportion of income |
+| `savings_to_income_ratio` | Savings relative to income |
+| `loan_amount_usd` | Outstanding loan principal |
+| `loan_interest_rate_pct` | Loan interest rate |
+| `has_loan_binary` | Binary label — 1 if the individual holds a loan (target: binary classification) |
+| `savings_tier` | Ordinal savings category: Very Low / Low / Medium / High / Very High (target: multi-class) |
+| `gender`, `education_level`, `employment_status`, `region`, `loan_type`, `age_group` | Demographic & categorical features |
+| `record_date` | Date of the financial record |
 
 ---
 
-## 🛠 Tech Stack
+## ⚙️ Pipeline Architecture
 
-| Category | Tools & Libraries |
+```
+Raw CSV
+  │
+  ▼
+[1] Data Loading & Overview        → shape, dtypes, missing values, summary stats
+  │
+  ▼
+[2] Exploratory Data Analysis      → 8 numeric distributions, correlation heatmap,
+  │                                   category breakdowns, scatter plots (fig01–fig12)
+  ▼
+[3] Feature Engineering            → date parsing → year/month extraction
+  │                                   derived features: net_monthly_cashflow,
+  │                                   expense_ratio, emi_burden_ratio
+  ▼
+[4] Preprocessing                  → LabelEncoder (6 categorical cols)
+  │                                   StandardScaler / MinMaxScaler per model
+  ▼
+[5] Model 1 — Regression           → predict monthly_expenses_usd
+  │
+[6] Model 2 — Binary Classification → predict has_loan_binary
+  │
+[7] Model 3 — Multi-Class          → predict savings_tier (5 classes)
+  │
+  ▼
+[8] Post-Training Analysis         → cross-validation comparison, confusion matrices,
+  │                                   ROC curves, feature importance (fig13–fig16)
+  ▼
+[9] FinPilot Budget Advisor        → rule-based personalized recommendation engine
+  │
+  ▼
+[10] Enhancement Block             → 3 additional model families + 10 new charts
+                                      (fig17–fig26)
+```
+
+---
+
+## 🤖 Models Trained
+
+### Model 1 — Monthly Expenses Prediction (Regression)
+
+| Model | Metric |
 |---|---|
-| **Language** | Python 3.9+ |
-| **Data Manipulation** | Pandas 2.0+, NumPy 1.24+ |
-| **Machine Learning** | Scikit-Learn 1.3+ |
-| **Statistical Analysis** | SciPy 1.11+ |
-| **Visualization** | Matplotlib 3.7+, Seaborn 0.12+ |
-| **Notebook Environment** | Jupyter Notebook / Google Colab |
-| **Preprocessing** | StandardScaler, LabelEncoder, MinMaxScaler |
-| **Model Evaluation** | StratifiedKFold, cross_val_score, permutation_importance, calibration_curve, learning_curve |
-| **ML Models** | Ridge, Lasso, RandomForest, ExtraTrees, GradientBoosting, HistGradientBoosting, SVR, MLPClassifier, KNeighborsClassifier, AdaBoost, DecisionTree |
+| Ridge Regression | MAE, RMSE, R² |
+| Lasso Regression | MAE, RMSE, R² |
+| Random Forest Regressor | MAE, RMSE, R² |
+| Extra Trees Regressor | MAE, RMSE, R² |
+| **Gradient Boosting Regressor** *(enhanced)* | MAE, RMSE, R² |
+| **HistGradient Boosting Regressor** *(enhanced)* | MAE, RMSE, R² |
+| **SVR (RBF kernel)** *(enhanced)* | MAE, RMSE, R² |
+
+### Model 2 — Loan Risk Classification (Binary)
+
+| Model | Metric |
+|---|---|
+| Logistic Regression | Accuracy, ROC-AUC |
+| Random Forest Classifier | Accuracy, ROC-AUC |
+| Extra Trees Classifier | Accuracy, ROC-AUC |
+| Decision Tree Classifier | Accuracy, ROC-AUC |
+| **Gradient Boosting Classifier** *(enhanced)* | Accuracy, ROC-AUC |
+| **MLP Neural Network** *(enhanced)* | Accuracy, ROC-AUC |
+| **K-Nearest Neighbors** *(enhanced)* | Accuracy, ROC-AUC |
+
+### Model 3 — Savings Tier Classification (Multi-Class, 5 Labels)
+
+| Model | Metric |
+|---|---|
+| Logistic Regression | Accuracy |
+| Random Forest Classifier | Accuracy |
+| Extra Trees Classifier | Accuracy |
+| Decision Tree Classifier | Accuracy |
+| **AdaBoost** *(enhanced)* | Accuracy |
+| **HistGradient Boosting Classifier** *(enhanced)* | Accuracy |
 
 ---
 
-## 🏗 System Architecture
-Personal_Finance_Dataset_1.csv
-(32,424 rows × 20 columns)
-│
-▼
-┌──────────────────────────────────────────┐
-│         STEP 1 — DATA LOADING & EDA      │
-│  Shape / dtypes / missing / statistics   │
-│  6 EDA figures  →  fig01 through fig06   │
-└──────────────────────────────────────────┘
-│
-▼
-┌──────────────────────────────────────────┐
-│       STEP 2 — FEATURE ENGINEERING       │
-│  13 derived financial features           │
-│  Age groups, savings tiers, credit tiers │
-│  Binary loan target, temporal features   │
-└──────────────────────────────────────────┘
-│
-▼
-┌──────────────────────────────────────────┐
-│   STEP 3 — PREPROCESSING (3 sets)        │
-│  Label encoding — 6 categorical columns  │
-│  StandardScaler applied per model        │
-│  Leakage-free feature selection per task │
-└──────────────────────────────────────────┘
-│
-┌──────────┼──────────┐
-▼          ▼          ▼
-┌──────────┐ ┌─────────┐ ┌──────────────┐
-│ MODEL 1  │ │ MODEL 2 │ │   MODEL 3    │
-│Regression│ │ Binary  │ │ Multi-Class  │
-│ Monthly  │ │  Loan   │ │   Savings    │
-│ Expenses │ │  Risk   │ │    Tier      │
-│Prediction│ │  Classif│ │Classification│
-└──────────┘ └─────────┘ └──────────────┘
-│
-▼
-┌──────────────────────────────────────────┐
-│   STEP 4 — POST-TRAINING ANALYSIS        │
-│  3-fold cross-validation all models      │
-│  Permutation importance (3 tasks)        │
-│  Calibration & Precision-Recall curves   │
-│  Learning curves — bias/variance check   │
-│  Residual diagnostics — regression       │
-│  Monthly time trend analysis             │
-│  Income band deep-dive (6 metrics)       │
-└──────────────────────────────────────────┘
-│
-▼
-┌──────────────────────────────────────────┐
-│     STEP 5 — FINPILOT ADVISOR ENGINE     │
-│  9 recommendation categories             │
-│  Composite Financial Health Score 0–100  │
-│  Letter grade: A / B / C / D             │
-│  50/30/20 budget guide per user          │
-│  Personalised dollar-amount targets      │
-└──────────────────────────────────────────┘
+## 💡 FinPilot Budget Advisor
+
+The rule-based advisor takes a user's financial profile as input and produces a personalized report with actionable recommendations. It evaluates:
+
+| Signal | Threshold / Logic |
+|---|---|
+| Emergency Fund | < 3 months of expenses → **Critical Alert** |
+| Expense Ratio | > 80% of income → **Overspending Warning** |
+| Savings Opportunity | 20–50% income → **Savings Target** |
+| Credit Score | Poor / Fair / Good / Very Good / Excellent bands |
+| Debt-to-Income | > 0.4 → **High Debt Risk** |
+| EMI Burden | EMI / Income > 30% → **EMI Overload** |
+| Retirement Readiness | Age > 50 with low savings → **Retirement Alert** |
+
+**Example usage:**
+
+```python
+finpilot_advisor(
+    monthly_income      = 5000,
+    monthly_expenses    = 3800,
+    savings             = 4000,
+    credit_score        = 620,
+    debt_to_income_ratio = 0.45,
+    has_loan            = True,
+    loan_amount         = 15000,
+    monthly_emi         = 450,
+    age                 = 34
+)
+```
+
+**Sample output:**
+```
+  ┌─────────────────────────────────────────────────────────┐
+  │         FinPilot AI — Personalised Financial Report      │
+  └─────────────────────────────────────────────────────────┘
+
+  📊 Financial Snapshot
+     Monthly Income    : $5,000.00
+     Monthly Expenses  : $3,800.00
+     Monthly EMI       : $450.00
+     Net Cashflow      : $750.00
+     Expense Ratio     : 76.0%
+     Savings           : $4,000.00  (1.1 months of expenses)
+     Credit Score      : 620  (Fair)
+     Debt-to-Income    : 0.45
+
+  💡 FinPilot Recommendations
+  -------------------------------------------------------
+  🚨 Emergency Fund   Your savings cover only 1.1 months ...
+  ⚠️  High Debt-to-Income  Your DTI of 0.45 exceeds ...
+  📈 Credit Improvement   A score of 620 limits your ...
+```
+
+---
+
+## 📊 Visualizations (26 Charts)
+
+### Original EDA & Model Plots (fig01 – fig16)
+| Figure | Description |
+|---|---|
+| fig01 | Distributions of 8 key numeric features |
+| fig02 | Correlation heatmap |
+| fig03 | Income vs. Expenses scatter by employment status |
+| fig04 | Savings distribution by age group |
+| fig05–fig08 | Category breakdowns (gender, education, region, loan type) |
+| fig09–fig12 | Feature pair plots and outlier analysis |
+| fig13 | Cross-validation comparison — all models |
+| fig14 | Confusion matrices (binary + multi-class) |
+| fig15 | ROC curves — binary classifiers |
+| fig16 | Feature importance — top regression & classification features |
+
+### Enhancement Plots (fig17 – fig26)
+| Figure | Description |
+|---|---|
+| fig17 | Learning curves — regression models |
+| fig18 | Learning curves — binary classifiers |
+| fig19 | Precision-Recall curves |
+| fig20 | Calibration curves (reliability diagrams) |
+| fig21 | Permutation importance — regression |
+| fig22 | Permutation importance — classification |
+| fig23 | Residual distribution (regression) |
+| fig24 | Predicted vs. Actual scatter |
+| fig25 | Model performance summary heatmap |
+| fig26 | Multi-class ROC (one-vs-rest) |
+
+All charts are saved to `finpilot_plots/` and merged into a single high-resolution board (`finpilot_combined_board.png`).
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Libraries |
+|---|---|
+| Data Manipulation | `pandas`, `numpy` |
+| Visualization | `matplotlib`, `seaborn`, `scipy` |
+| Machine Learning | `scikit-learn` |
+| Regression | Ridge, Lasso, RandomForest, ExtraTrees, GradientBoosting, HistGradientBoosting, SVR |
+| Classification | LogisticRegression, RandomForest, ExtraTrees, DecisionTree, GradientBoosting, HistGradientBoosting, MLP, KNN, AdaBoost |
+| Evaluation | MAE, RMSE, R², Accuracy, ROC-AUC, Precision-Recall, Calibration |
+| Preprocessing | LabelEncoder, StandardScaler, MinMaxScaler, StratifiedKFold |
+| Environment | Python 3, Jupyter Notebook / Google Colab |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/dhrumil231/FinPilotAI.git
+cd FinPilotAI
+```
+
+### 2. Install dependencies
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn scipy
+```
+
+### 3. Add the dataset
+Place `Personal_Finance_Dataset_1.csv` in the project root directory.
+
+### 4. Run the notebook
+```bash
+jupyter notebook FinPilotAI_2_.ipynb
+```
+Or open directly in **Google Colab** — the notebook includes Colab-compatible display cells for all visualizations.
+
+---
+
+## 📈 Results Summary
+
+| Task | Best Model | Key Metric |
+|---|---|---|
+| Monthly Expenses Regression | HistGradient Boosting / Gradient Boosting | R², MAE, RMSE |
+| Loan Risk (Binary) | Gradient Boosting / MLP | ROC-AUC |
+| Savings Tier (Multi-Class) | HistGradient Boosting | Accuracy |
+
+> *Exact metric values depend on dataset version and random seed. Run the notebook to reproduce results.*
+
+---
+
+## 🔭 Future Enhancements
+
+- [ ] Integrate XGBoost / LightGBM / CatBoost for benchmark comparison
+- [ ] Build a Streamlit web app for the FinPilot Budget Advisor
+- [ ] Add SHAP explainability for model transparency
+- [ ] Time-series forecasting on `record_date` for income/expense trends
+- [ ] Hyperparameter tuning with Optuna or GridSearchCV
+- [ ] Deploy as an API (FastAPI + Docker)
+
+---
+
+## 👤 Author
+
+**Dhrumil Shah**
+MS Engineering Management — Syracuse University  
+[GitHub](https://github.com/dhrumil231) · [LinkedIn](https://www.linkedin.com/in/dhrumilshah231/)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
